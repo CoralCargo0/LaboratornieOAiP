@@ -5,7 +5,7 @@
 int main()
 {
 	setlocale(LC_ALL, "Russian");
-	int f = 1, i = 1, m = 0, ms[n], error;
+	int f = 1, i, m = 0, ms[n], error;
 	printf_s("Введите числa \n");
 	for (i = 0; i < n; i++) // Ввод массива
 	{
@@ -24,7 +24,7 @@ int main()
 			m += 1;     //Подсчет числа m
 		}
 	}
-	printf_s("m = %d \n", m);
+	printf_s("Число замененных элементов m = %d \n", m);
 	i = m;
 	while (i > 0)                  //Высчитывание факториала
 	{
