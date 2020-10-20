@@ -5,7 +5,7 @@
 int main()
 {
 	setlocale(LC_ALL, "Russian");//Русификация вывода
-	int i, d, k, supermas[n][n], ms[2*n],error;
+	int i, k, supermas[n][n], ms[2*n],error;
 	printf_s("Введите числa \n");
 	for (i = 0; i < n; i++) // Ввод массива
 	{
@@ -17,9 +17,9 @@ int main()
 			rewind(stdin);
 		}
 		  } while (error == 0);
-	}for (d = 0; d < n; d++)      
+	}for (i = 0; i < n; i++)      
 	{
-		ms[d + n] = ms[d];
+		ms[i + n] = ms[i];
 	}
 	printf("Матрица заданного вида:\n");
 	for (k= 0; k < n; k++) //Процесс создания искомой матрицы
