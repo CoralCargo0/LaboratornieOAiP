@@ -6,17 +6,17 @@
 int main()
 {
 	setlocale(LC_ALL, "Russian");    //Русификация вывода
-	int size, Column, i, num = 0, Line, ** matrix, *array, amount;
+	int size, Column, i, num = 0, Line, ** matrix, * array, amount;
 	printf_s("Введите размерность матрицы \n");
 	do
 	{
 		amount = scanf_s("%d", &size);                            //Ввод и проверка размерности
-		if (amount == 0)
+		if (amount == 0 || size < 0)
 		{
 			printf("Ошибка, пожалуйста введите число\n");
 			rewind(stdin);
 		}
-	} while (amount == 0);
+	} while (amount == 0 || size < 0);
 	printf_s("Введите числa \n");
 	if (!(array = (int*)calloc(size * size, sizeof(int))))return 0;//Выделение и проверка памяти под начальный массив
 	if (!(matrix = (int**)calloc(size, sizeof(int*))))            //Выделение и проверка памяти для конечной матрицы
