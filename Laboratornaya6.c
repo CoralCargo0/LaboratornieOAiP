@@ -77,6 +77,10 @@ int main()
 			printf("%4d ", *(*(matrix + Line) + Column));
 		}
 		printf("\n");
+	}
+	for (Column = 0; Column < size; Column++)
+	{
+		free(matrix[Column]);
 	}free(matrix); free(array);
 	return 0;
 }
