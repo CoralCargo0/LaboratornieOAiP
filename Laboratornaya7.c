@@ -1,10 +1,9 @@
 ﻿#include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
-#include <iostream>
+#include <locale.h>
 int main()
 {
-	system("chcp 1251");
+	setlocale(LC_ALL, "Russian");//Русификация вывода
 	system("cls");
 	char* string;
 	int strsize, i = 1 , error ;
@@ -24,8 +23,7 @@ int main()
 		}
 	} while (string == NULL);
 	printf(" Задайте строку: ");
-	error = getchar();
-	if (error == NULL)return 0;
+	rewind(stdin);
 	fgets(string, strsize, stdin);
 	while (string[i]!='\n')
 	{
