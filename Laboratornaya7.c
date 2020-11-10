@@ -1,9 +1,9 @@
-﻿#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
 int main()
 {
-	setlocale(LC_ALL, "Russian");//Русификация вывода
+	system("chcp 1251");
 	system("cls");
 	char* string;
 	int strsize, i = 1 , error ;
