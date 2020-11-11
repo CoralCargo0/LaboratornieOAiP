@@ -25,30 +25,20 @@ int main()
 	printf(" Задайте строку: ");
 	rewind(stdin);
 	fgets(string, strsize, stdin);
-	while (string[i]!='\n')
+	while (string[i] != '\n')
 	{
-		if (string[i] == '.' || string[i]== '?' || string[i]== '!' )
-		{
-			i++;
-			if (string[i] == '\n')break ;
-			if (string[i] == ' ')i += 2;
-			else i++;
-			continue;
-			
-		}
-		if ( string[i]>=32 && string[i]<= 64 || string[i] == '»' || string[i] == '«')
-		{ 
-			i++;
-			continue;
-		}
 		if (string[i] == 'Ё')
 		{
-			*(string+i) = -72;
+			*(string + i) = -72;
 			i++;
 			continue;
 		}
-		string[i] += 32;
-		i++;
+		if (string[i]>='A' && string[i]<='Z' || string[i] >= 'А' && string[i] <= 'Я')
+		{
+			string[i] += 32;
+			i++;
+		}
+		else i++;
 	}
 	printf(" Новая строка: %s\n", string);
 	free(string);
