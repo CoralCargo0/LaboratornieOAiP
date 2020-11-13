@@ -27,6 +27,15 @@ int main()
 	fgets(string, strsize, stdin);
 	while (string[i] != '\n')
 	{
+		if (string[i] == '.' || string[i]== '?' || string[i]== '!' )
+		{
+			i++;
+			if (string[i] == '\n')break ;
+			if (string[i] == ' ')i += 2;
+			else i++;
+			continue;
+			
+		}
 		if (string[i] == 'Ё')
 		{
 			*(string + i) = -72;
