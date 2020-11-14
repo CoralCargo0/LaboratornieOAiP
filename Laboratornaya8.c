@@ -17,17 +17,16 @@ int main()
 	scanf_s(" %d", &max_rows);
 	printf("Введите количество символов в строке\n");
 	scanf_s(" %d", &max_symb);
-	str = (char**)calloc(max_rows + 1, sizeof(char*));
+	str = (char**)calloc(max_rows + 1, sizeof(char*)); //Выделение памяти под строки
 	for (i = 0; i < max_rows; i++)
 		str[i] = (char*)calloc(max_symb + 1, sizeof(char));
-
 	printf("Введите %3d строк длинной не более %3d символов\n", max_rows, max_symb);
 	for (i = 0; i < max_rows; i++)
 	{
 		rewind(stdin);
 		fgets(str[i], max_symb, stdin);
 	}
-	for (int z = 0; z < max_rows / 4; z++)
+	for (int z = 0; z < max_rows / 4; z++)     //Сортировка по алфавиту
 	{
 		min_str = str[0];
 		u = 0;
@@ -55,7 +54,7 @@ int main()
 
 
 	}
-	for (i = 0; i < max_rows; i++)
+	for (i = 0; i < max_rows; i++)  //Очистка памяти
 	{
 		free(str[i]);
 	}
