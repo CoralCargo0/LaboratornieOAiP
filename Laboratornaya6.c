@@ -1,12 +1,11 @@
-﻿#include <stdio.h>
+#include <stdio.h>
 #include<locale.h>
 #include<stdlib.h>
-
 
 int main()
 {
 	setlocale(LC_ALL, "Russian");    //Русификация вывода
-	int size, Column, i, num = 0, Line, ** matrix, * array, amount;
+	int size, column, i, num = 0, row, ** matrix, amount, error;
 	printf_s("Введите размерность матрицы \n");
 	do
 	{
@@ -18,69 +17,88 @@ int main()
 		}
 	} while (amount == 0 || size < 0);
 	printf_s("Введите числa \n");
-	if (!(array = (int*)calloc(size * size, sizeof(int))))return 0;//Выделение и проверка памяти под начальный массив
-	if (!(matrix = (int**)calloc(size, sizeof(int*))))            //Выделение и проверка памяти для конечной матрицы
+	if (!(matrix = (int**)calloc(size, sizeof(int*))))            //Выделение и проверка памяти для матрицы
 	{
-		free(array);
 		return 0;
 	}
-	for (Column = 0; Column < size; Column++)
+	for (column = 0; column < size; column++)
 	{
-		if (!(matrix[Column] = (int*)calloc(size, sizeof(int))))
+		if (!(matrix[column] = (int*)calloc(size, sizeof(int))))
 		{
-			free(array);
 			free(matrix);
 			return 0;
 		}
 	}
-	for (Column = 0; Column < size * size; Column++)             // Ввод и проверка массива
-	{
-		do
-		{
-			amount = scanf_s("%d", &array[Column]);
-			if (amount == 0)
-			{
-				printf("Ошибка, пожалуйста введите число\n");
-				rewind(stdin);
-			}
-		} while (amount == 0);
-	}Line = 0; Column = 0;
+	row = 0; column = 0;
 	if (size % 2 == 1)amount = size / 2 + 1;                    //Рассчет количества витков
 	else amount = size / 2;
 	for (i = 0; i < amount; i++)
 	{
-		while (Column + 2 * i < size)                            //Размещение элементов по строкам вправо
+		while (column + 2 * i < size)                            //Размещение элементов по строкам вправо
 		{
-			*(*(matrix + Line + i) + Column + i) = *(array + num);
-			num++; Column++;
-		}Column--; Line++;
-		while (Line + 2 * i < size)                              //Размещение элементов по столбцам вниз
+			do
+			{
+				error=scanf_s("%d", &*(*(matrix + row + i) + column + i));
+				if (error == 0)
+				{
+					printf("Ошибка, пожалуйста введите число\n");
+					rewind(stdin);
+				}
+			} while (error == 0);
+			num++; column++;
+		}column--; row++;
+		while (row + 2 * i < size)                              //Размещение элементов по столбцам вниз
 		{
-			*(*(matrix + Line + i) + Column + i) = *(array + num);
-			num++; Line++;
-		}Line--; Column--;
-		while (Column > -1)                                    //Размещение элементов по строкам влево
+			do
+			{
+				error = scanf_s("%d", &*(*(matrix + row + i) + column + i));
+				if (error == 0)
+				{
+					printf("Ошибка, пожалуйста введите число\n");
+					rewind(stdin);
+				}
+			} while (error == 0);
+			num++; row++;
+		}row--; column--;
+		while (column > -1)                                    //Размещение элементов по строкам влево
 		{
-			*(*(matrix + Line + i) + Column + i) = *(array + num);
-			num++; Column--;
-		}Column++; Line--;
-		while (Line > 0)                                       //Размещение элементов по столбцам вверх
+			do
+			{
+				error = scanf_s("%d", &*(*(matrix + row + i) + column + i));
+				if (error == 0)
+				{
+					printf("Ошибка, пожалуйста введите число\n");
+					rewind(stdin);
+				}
+			} while (error == 0);
+			num++; column--;
+		}column++; row--;
+		while (row > 0)                                       //Размещение элементов по столбцам вверх
 		{
-			*(*(matrix + Line + i) + Column + i) = *(array + num);
-			num++; Line--;
+			do
+			{
+				error = scanf_s("%d", &*(*(matrix + row + i) + column + i));
+				if (error == 0)
+				{
+					printf("Ошибка, пожалуйста введите число\n");
+					rewind(stdin);
+				}
+			} while (error == 0);
+			num++; row--;
 		}
 	}
-	for (Line = 0; Line < size; Line++)                        //Вывод полученной матрицы 
+	for (row = 0; row < size; row++)                        //Вывод матрицы 
 	{
-		for (Column = 0; Column < size; Column++)
+		for (column = 0; column < size; column++)
 		{
-			printf("%4d ", *(*(matrix + Line) + Column));
+			printf("%3d ", *(*(matrix + row) + column));
 		}
 		printf("\n");
 	}
-	for (Column = 0; Column < size; Column++)
+	for (column = 0; column < size; column++)              //Чистка памяти
 	{
-		free(matrix[Column]);
-	}free(matrix); free(array);
+		free(matrix[column]);
+	}
+	free(matrix);
 	return 0;
 }
